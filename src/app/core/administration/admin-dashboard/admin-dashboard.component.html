@@ -1,0 +1,189 @@
+<section>
+    <div class="">
+
+        <!-- <div class="row" > -->
+        <div class="row" *ngIf="!statsLoading && summary && !errorFetchingSummary">
+            <div class="col-lg-3">
+        <div class="container-content p-3 mb-2">
+            <div class="d-flex justify-content-between ">
+                <p class="head-text">Total Revenue</p>
+                <img src="/assets/Images/total-sales.png" alt="">
+            </div>
+            <h3 class="head-count">₦{{summary?.totalRevenue | number:'1.0-0'}}</h3>
+            <p class="head-brief">+{{summary?.yesterdayRevenue | number:'1.0-0'}} Today</p>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="container-content p-3 mb-2">
+            <div class="d-flex justify-content-between ">
+                <p class="head-text">Total Orders</p>
+                <img src="/assets/Images/orders.png" alt="">
+            </div>
+            <h3 class="head-count">{{summary?.totalOrders | number:'1.0-0'}}</h3>
+            <p class="head-brief">+{{summary?.todayOrders | number:'1.0-0'}} Today</p>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="container-content p-3 mb-2">
+            <div class="d-flex justify-content-between ">
+                <p class="head-text">Total Customers</p>
+                <img src="/assets/Images/stocks.png" alt="">
+            </div>
+            <h3 class="head-count">{{summary?.totalCustomers | number:'1.0-0'}}</h3>
+            <p class="head-brief">+{{summary?.newCustomersLastWeek | number:'1.0-0'}} Last 7 days</p>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="container-content p-3 MB-2">
+            <div class="d-flex justify-content-between ">
+                <p class="head-text">Total Vendors</p>
+                <img src="/assets/Images/pending.png" alt="">
+            </div>
+            <h3 class="head-count">{{summary?.totalVendors | number:'1.0-0'}}</h3>
+            <p class="head-brief">+{{summary?.newVendorsLastWeek | number:'1.0-0'}} Last 7 days</p>
+        </div>
+    </div>
+    
+
+        </div>
+
+
+
+    </div>
+    <div class="px-4">
+
+        <section class="content row" *ngIf="statsLoading && !summary && !errorFetchingSummary">
+    <div class="py-5 p-5 center">
+        <div>
+    
+            <img style="height: 100px;" src="/assets/Images/requestLoading.gif" alt="">
+            <p class="loading-text text-center text-muted">Loading...</p>
+        </div>
+    </div>
+          </section >
+    
+          <section class="content center" *ngIf="!statsLoading && !summary && errorFetchingSummary">
+            <div class="py-5 ">
+              <div class="py-3 text-center" >
+                <img src="/assets/Images/oops.png" style="height: 100px;" alt="">
+                <p class="loading-text  text-muted py-3">Could not display summary. Click 'Refresh' to try again.
+            </p>
+                <p class="refresh" (click)="refreshSummary()">Refresh <i class="bi bi-arrow-repeat"></i></p>
+              </div>
+            </div>
+          </section>
+    </div>
+</section>
+
+<!-- Graph -->
+
+     <section class=" mt-2 mb-3">
+ <section class=" mt-2 mb-3">
+  <div class="row equal-height">
+    <div class="col-lg-4 mb-2">
+      <div class="content">
+        <p class="head-title mt-2">Top Selling Products</p>
+
+        <section *ngIf="statsLoading && !summary && !errorFetchingSummary">
+          <div class="py-5 p-5 center">
+            <div>
+              <img style="height: 100px;" src="/assets/Images/requestLoading.gif" alt="">
+              <p class="loading-text text-center text-muted">Loading...</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="center" *ngIf="!statsLoading && !summary && errorFetchingSummary">
+          <div class="py-5">
+            <div class="py-3 text-center">
+              <img src="/assets/Images/oops.png" style="height: 100px;" alt="">
+              <p class="loading-text text-muted py-3">Could not display summary. Click 'Refresh' to try again.</p>
+              <p class="refresh" (click)="refreshSummary()">Refresh <i class="bi bi-arrow-repeat"></i></p>
+            </div>
+          </div>
+        </section>
+
+        <div *ngIf="!statsLoading && summary && !errorFetchingSummary">
+          <div style="border-top: 1px solid #3E245821;" *ngFor="let item of summary?.topSellingProducts | paginate: { itemsPerPage: 5, currentPage: 1 }; " class="d-flex justify-content-start align-items-center mb-3 mt-3 p-1">
+            <img [src]="item?.image" alt="Event Image" class="prod-image me-3">
+            <div class="event-details flex-grow-1">
+              <div class="d-flex justify-content-between">
+                <div class="me-3">
+                  <p class="mb-0 prod-name">{{item?.product }}</p>
+                  <p class="mb-0 vendor">{{ item?.vendor }} &nbsp; <span> <a style="color: var(--primary-color);" routerLink="/store/{{ item?.shopLink }}">View store</a></span></p>
+                </div>
+                <div class="event-date text-center">
+                  <p class="mb-0 prod-amount">{{item?.totalSold || 0 | number:'1.0-0'}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-8 ">
+      <section>
+        <div class=" content">
+     <div class="d-flex flex-column flex-md-row justify-content-between mt-3 mb-2">
+  <div class=" mb-md-0 w-100">
+    <h3 class="head-title mb-1">Total Sales Amount</h3>
+    <p class="text-muted">Monthly sales overview</p>
+  </div>
+  <div class="d-flex align-items-center justify-content-end w-100 w-md-auto year-selection">
+    <label class="me-3" for="month">Select Month:</label>
+    <select id="month" [(ngModel)]="selectedMonth" (change)="changeMonth($event)">
+      <option *ngFor="let month of months" [value]="month.value">{{ month.label }}</option>
+    </select>
+  </div>
+</div>
+
+          <canvas #mySalesLineChart id="MySalesLineChart"></canvas>
+        </div>
+      </section>
+    </div>
+  </div>
+</section>
+
+</section>
+
+
+    <section>
+  <div class="chart-container content">
+    <div class="d-flex flex-column flex-md-row justify-content-between mt-3 mb-2">
+      <div class="mb-md-0 w-100">
+        <h3 class="head-title mb-1">User Statistics</h3>
+        <p class="text-muted">New account signup</p>
+      </div>
+      <div class="d-flex align-items-center justify-content-end year-selection w-100 w-md-auto">
+        <label class="me-3" for="year">Select Year:</label>
+        <select id="year" [(ngModel)]="selectedYear" (change)="changeYear($event)">
+          <option *ngFor="let year of years">{{ year }}</option>
+        </select>
+      </div>
+    </div>
+    <canvas class="chart-canvas" #myLineChart id="MyLineChart"></canvas>
+  </div>
+</section>
+
+
+<div id="updateProfileModal" class="modal" style="z-index: 1!important">
+  <div
+    class="modal-center-content mx-auto pt-4 px-2 px-lg-5"
+    style="border-radius: 10px !important;"
+  >
+    <div class="d-flex justify-content-end px-4 px-lg-2">
+      <!-- <p class="modal-heading text-center">Purchase Quantity Error</p> -->
+      <img
+        style="cursor: pointer"
+        class=""
+        (click)="toggleModal('updateProfileModal', 'close')"
+        src="/assets/Images/dismiss.svg"
+        alt="Close"
+      />
+    </div>
+    <div class="modal-body text-center mb-5">
+<app-profile-update (UpdateSuccess)="updateSuccess()" (UpdateStart)="toggleModal('updateProfileModal', 'close')"></app-profile-update>
+  </div>
+</div>
+</div>

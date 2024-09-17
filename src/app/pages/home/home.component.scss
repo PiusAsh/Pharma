@@ -1,0 +1,22 @@
+/* Custom styling for the sidebar and carousel */
+
+ul.list-group-item {
+  cursor: pointer;
+}
+
+.carousel-inner img {
+  max-height: 400px;
+  object-fit: cover;
+}
+
+.carousel-caption {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* Styling for features section icons */
+.display-4 {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+}

@@ -1,0 +1,37 @@
+
+.not-found {
+    background-color: #fff!important;
+    color: #495057;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+}
+
+.container {
+    text-align: center;
+}
+
+.error-code {
+    font-size: 120px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.error-message {
+    font-size: 24px;
+    margin: 10px 0;
+}
+
+.home-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 18px;
+}
+@media (max-width: 992px) {
+  .error-message {
+    font-size: 20px;
+    margin: 10px 0;
+}
+}

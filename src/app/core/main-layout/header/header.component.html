@@ -1,0 +1,65 @@
+<header class="bg-surface-primary border-bottom d-none d-lg-block sticky-top  head" style="z-index: 998;">
+    <div class="container-fluid">
+      <div class=" p-2">
+      <div class="row align-items-center">
+  <!-- Title and Search -->
+  <div class="col-sm-5 col-12">
+    <div class="search-container d-flex align-items-center" (click)="onSearch()">
+      <div class="icon-circle">
+        <i class="search-icon bi bi-search" style="font-size: 14px!important;"></i>
+      </div>
+      <input type="text" [(ngModel)]="searchTerm" class="search-input" placeholder="Search...">
+    </div>
+  </div>
+
+  <!-- User Information -->
+  <div class="col-sm-7 col-12">
+    <div class="d-flex justify-content-between align-items-center px-3">
+      <div class="d-flex align-items-center">
+        <img class="me-2" style="height: 20px;" src="/assets/Images/Calendar.png" alt="">
+        <p class="date mt-3">{{ formattedDate }}</p>
+      </div>
+
+      <!-- Notification Icon -->
+      <div class="notification-container">
+        <i class="bi bi-bell-fill notification-icon" style="font-size: 25px!important"></i>
+        <div class="notification-count">0</div>
+      </div>
+
+      <!-- User Profile Picture -->
+       <div class="d-flex align-items-center">
+<div class="me-4 d-flex flex-column">
+  <p class="name mb-1">{{ userDetails?.firstName }} {{ userDetails?.lastName }}</p>
+  <small class="text-muted" style="margin-left: auto; font-size: 14px; font-weight: 500;">
+    {{ capitalizeFirstLetter(userDetails?.role) }}
+  </small>
+</div>
+
+
+         <div class="d-flex align-items-center">
+  
+           <div class="profile-picture">
+<ng-container *ngIf="userDetails?.storeImage; else profileImageContainer">
+    <img alt="Store Image" [src]="userDetails?.storeImage" class="">
+  </ng-container>
+  <ng-template #profileImageContainer>
+    <ng-container *ngIf="userDetails?.profileImage; else placeholderIcon">
+      <img alt="Profile Picture" [src]="userDetails?.profileImage" class="">
+    </ng-container>
+  </ng-template>
+  <ng-template #placeholderIcon>
+    <i class="bi bi-person-circle text-primary avatar avatar-rounded-circle" style="font-size: 2rem;"></i>
+  </ng-template>
+             <!-- <img src="/assets/Images/Container.png" alt="User Profile Picture"> -->
+           </div>
+           <img style="height: 30px;" src="/assets/Images/down-icon.png" alt="">
+         </div>
+       </div>
+    </div>
+  </div>
+</div>
+
+      </div>
+    </div>
+  </header>
+  

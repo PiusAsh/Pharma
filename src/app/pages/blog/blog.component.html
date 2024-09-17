@@ -1,0 +1,44 @@
+<app-navbar></app-navbar>
+
+<app-breadcrumb currentPageLink="Blog" previousLink=""></app-breadcrumb>
+<section class="py-5 container">
+  <app-state-handler 
+ [isLoading]="loading" 
+  [hasError]="error" 
+  [isEmpty]="!posts?.length" 
+  [dataAvailable]="posts?.length > 0"
+  (retry)="getAllPosts()"
+  name="posts"
+  >
+    <div class="row">
+      <div class="col-lg-4 col-md-6 mb-4" *ngFor="let post of posts">
+        <div class="card h-100">
+          <img *ngIf="post?.images?.length" 
+            [src]="post?.images[0] || '/assets/Images/no-post-image.jpg'" 
+            class="card-img-top" 
+            alt="{{ post?.title }}"
+          />
+          <img *ngIf="!post?.images?.length" 
+            src="/assets/Images/no-post-image.jpg" 
+            class="card-img-top" 
+            alt="{{ post?.title }}"
+          />
+          <div class="card-body">
+            <p class="card-text" >
+            <span>{{ post?.category || 'uncategorized' }}</span> <strong> /</strong> 
+              {{ post?.dateCreated | date: 'MMM d, y'}} <strong>/</strong>  Post by <span>{{ post?.author?.firstName }} {{ post?.author?.lastName }}</span>
+            </p>
+            <h5 (click)="viewPost(post?._id)" class="card-title">{{ post?.title }}</h5>
+            <p class="card-text">{{ post?.content }}</p>
+          </div>
+          <div class="card-footer text-center">
+            <a (click)="viewPost(post?._id)" class="btn">Read More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </app-state-handler>
+</section>
+
+
+<app-footer></app-footer>

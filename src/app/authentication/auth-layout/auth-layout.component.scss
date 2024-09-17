@@ -1,0 +1,182 @@
+/* General styles */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+/* Purple background styling */
+.purple-background {
+  background-color: #4b3069;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 30px;
+}
+
+.form-container {
+  max-width: 450px;
+  width: 100%;
+  background-color: white;
+  padding: 30px 30px;
+  border-radius: 20px;
+}
+.bi{
+    color: var(--primary-color);
+    font-weight: 800!important;
+    font-size: 20px;
+}
+/* Position the eye icon inside the input field */
+.password-toggle-icon {
+  right: 10px;
+  top: 72%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: #6f42c1;
+}
+.form-group {
+  position: relative;
+}
+.auth-input{
+    border: 1px solid #D9D9D9;
+    border-radius: 10px;
+    height: 45px;
+    margin-bottom: 5px;
+}
+label{
+font-size: 14px;
+font-weight: 600;
+line-height: 16.94px;
+color: var(--primary-color);
+
+}
+p{
+font-size: 14px;
+font-weight: 500;
+line-height: 16.94px;
+color: black;
+
+}
+h2{
+line-height: 16.94px;
+color: black;
+
+}
+
+.logo {
+  width: 150px;
+  margin-bottom: 20px;
+}
+
+
+
+.forgot-password {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.btn-primary {
+  background-color: #6f42c1;
+  border-color: #6f42c1;
+}
+
+a {
+  color: var(--primary-color);
+}
+
+/* Carousel */
+.carousel-item img {
+  height: 100vh;
+  object-fit: cover;
+}
+.carousel {
+  height: 100vh;
+}
+
+.carousel-inner {
+  height: 100%;
+}
+
+.carousel-item {
+  height: 100%;
+}
+
+.carousel-overlay {
+  position: relative;
+  height: 100%; /* Ensure the overlay div is also 100% of the height */
+}
+
+.carousel-overlay img {
+  width: 100%;
+  height: 100%; /* Ensures the image covers the full height */
+  object-fit: cover; /* Maintain aspect ratio while filling */
+}
+
+.carousel-overlay::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Black overlay with 50% opacity */
+  z-index: 1;
+}
+
+.carousel-indicators li {
+  background-color: var(--primary-color);
+  display: none;
+}
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: white !important; /* Ensures the background is white by default */
+  color: var(--primary-color); /* Icon color is the primary color */
+  border-radius: 50%; /* Circular background */
+  padding: 20px;
+  width: 50px; /* Adjust control width */
+  height: 50px; /* Adjust control height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 5; /* Bring controls forward */
+  border: none; /* Ensure there's no border or unwanted line */
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  width: 5%; /* Adjust width for better appearance */
+  z-index: 5; /* Ensure the buttons are in front */
+  margin: 0 20px;
+  background: transparent; /* Make sure the button itself is transparent */
+  border: none; /* No border for the controls */
+}
+
+.carousel-control-prev-icon::before,
+.carousel-control-next-icon::before {
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  font-size: 25px; /* Icon size 25px */
+  color: var(--primary-color); /* Primary color for the icon */
+  content: none; /* Avoid any default content or line from pseudo-elements */
+}
+
+.carousel-control-prev-icon::before {
+  content: '\f104'; /* Font Awesome left arrow icon */
+}
+
+.carousel-control-next-icon::before {
+  content: '\f105'; /* Font Awesome right arrow icon */
+}
+
+/* Mobile view: Make the form section cover full height */
+@media (max-width: 768px) {
+  .purple-background {
+    min-height: 100vh;
+    height: auto !important;
+  }
+}

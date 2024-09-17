@@ -1,0 +1,72 @@
+<app-navbar></app-navbar>
+
+<section class="mb-5 mt-1">
+<div class="container-fluid">
+  <div class="row">
+    <!-- Sidebar with Menu -->
+    <div class="col-lg-3 d-none d-lg-block p-0">
+      <ul class="list-group">
+        <li *ngFor="let menu of menus" class="list-group-item">
+          <div class="d-flex justify-content-between align-items-center" (click)="toggleSubmenu(menu)">
+            <span>{{ menu.name }}</span>
+            <i class="bi bi-chevron-right" ></i>
+          </div>
+          <!-- Subcategories (Displayed when clicked) -->
+          <ul *ngIf="menu.showSubcategories" class="list-group ms-3 slide-bottom">
+            <li *ngFor="let sub of menu.subcategories" class="list-group-item">
+              {{ sub }}
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Main Carousel -->
+    <div class="col-lg-9 p-0">
+      <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+          <button *ngFor="let slide of carouselSlides; let i = index" type="button" 
+                  data-bs-target="#carouselExampleIndicators" 
+                  [attr.data-bs-slide-to]="i" 
+                  [class.active]="i === 0"></button>
+        </div>
+        <div class="carousel-inner">
+          <div *ngFor="let slide of carouselSlides; let i = index" 
+               class="carousel-item" 
+               [class.active]="i === 0">
+            <img [src]="slide.image" class="d-block w-100" [alt]="slide.title">
+            <div class="carousel-caption">
+              <h5>{{ slide.title }}</h5>
+              <p>{{ slide.description }}</p>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        </button>
+      </div>
+        <!-- Features Section -->
+  <div class="row mt-3 shadow-sm">
+    <div class="col-lg-3 col-md-6 text-center" *ngFor="let feature of features">
+      <i class="{{ feature.icon }} display-4"></i>
+      <h5>{{ feature.title }}</h5>
+      <p>{{ feature.description }}</p>
+    </div>
+  </div>
+    </div>
+  </div>
+
+
+</div>
+
+
+  </section>
+ 
+  
+  
+
+<app-footer></app-footer>
+
